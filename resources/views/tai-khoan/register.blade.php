@@ -29,7 +29,7 @@
                             </div>
                             <br>
                             <div>
-                                <label>Email :</label>
+                                <label>Nhập email của bạn (*):</label>
                                 <input type="email" class="form-control" placeholder="Nhập email của bạn" name="email">
                                 @error('email')
                                 <div class="alert alert-danger">
@@ -66,6 +66,13 @@
                                     <li>{{ $message }}</li>
                                 </div>
                                 @enderror
+                            </div>
+                            <div>
+                                <label>Chọn ảnh đại diện của bạn (*):</label>
+                                <label class="picture" for="picture__input" tabIndex="0">
+                                    <span class="picture__image"></span>
+                                </label>
+                                    <input type="file" name="picture__input" id="picture__input">
                             </div>
                             <br>
                             <p style="color: red">(*) Bắt buộc</p>
