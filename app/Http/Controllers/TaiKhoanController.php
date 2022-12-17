@@ -98,7 +98,8 @@ class TaiKhoanController extends Controller
 
             }else
             {
-                Alert::success('Đăng nhập thành công','Xin chào '.Auth::user()->ho_ten);     
+                alert()->image('Xin chào!'.Auth::user()->ho_ten,'Chúc bạn một ngày vui vẻ',asset('images\111.jpg'),'250px','250px');
+                //Alert::success('Đăng nhập thành công','Xin chào '.Auth::user()->ho_ten);     
                 return redirect()->route('show-trang-chu');
             }
         }
