@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BaiViet;
+use App\Models\TheoDoiBaiViet;
 use App\Models\ThongBao;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -422,5 +423,43 @@ class BaiVietController extends Controller
         $listTimKiem = BaiViet::where('tieu_de','like','%'.$request->search.'%')->where('trang_thai',1)->get();
         return view('bai-viet.tim-kiem',['listTimKiem'=>$listTimKiem]);
 
+    }
+    public function LuuBaiViet($id)
+    {
+        $LuuBaiViet = BaiViet::find($id);
+        if(empty($LuuBaiViet))
+        {
+            Alert::error('Bài viết không còn tồn tại');
+            return redirect()->route('show-trang-chu');
+        }
+        $checkBaiVietid = TheoDoiBaiViet::where('bai_viet_id',$id)->where('nguoi_dung_id',Auth::user()->id)->first();
+        if(!$checkBaiVietid)
+        {
+        $Luu = new TheoDoiBaiViet;
+        $Luu->bai_viet_id = $id;
+        $Luu->nguoi_dung_id = Auth::user()->id;
+        $Luu->tieu_de = $LuuBaiViet->tieu_de;
+        $Luu->noi_dung = $LuuBaiViet->noi_dung;
+        $Luu->save();
+        Alert::success('Bạn đã theo dõi bài viết này!');
+        return redirect()->route('show-chi-tiet-bv',['id' => $id]);
+        }
+        else
+        {
+            Alert::error('Bạn đã theo dõi bài viết này rồi');
+            return redirect()->route('show-chi-tiet-bv',['id' => $id]);
+        }
+
+    }
+    public function BoTheoDoi($id)
+    {
+        $boTheoDoi = TheoDoiBaiViet::find($id);
+        if(empty($boTheoDoi)){
+            Alert::error('Bài viết không còn tồn tại');
+            return redirect()->route('thong-tin-user',['id'=>Auth::user()->id]);
+        }
+        $boTheoDoi->delete();
+        Alert::success('Bạn đã bỏ theo dõi bài viết này');
+        return redirect()->route('thong-tin-user',['id'=>Auth::user()->id]);
     }
 }

@@ -42,6 +42,7 @@
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Đã duyệt</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Chưa duyệt</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab2" data-toggle="tab" href="#nav-profile2" role="tab" aria-controls="nav-profile2" aria-selected="false">Bài viết đang theo dõi</a>
 
 
                     </div>
@@ -63,11 +64,17 @@
                                 @foreach($listBaiViet as $BaiViet) 
                                 <tbody>
                                     <tr>
-                                    <td>{{$BaiViet->tieu_de}}</td>
+                                    <td style="width: 250px;">{{$BaiViet->tieu_de}}</td>
                                     <td>{{$BaiViet->noi_dung}}</td>
                                     
-                                    <td><a href="{{route('xoa-bai-viet-cn',['id'=>$BaiViet->id])}}" class="btn btn-danger" onclick="confirmation(event)">Xóa bài viết</a>
-                                    <a href="{{route('show-chi-tiet-bv',['id'=>$BaiViet->id])}}" class="btn btn-success">Xem bài viết</a></td>
+                                    <td style="width: 100px;"><a href="{{route('xoa-bai-viet-cn',['id'=>$BaiViet->id])}}" class="btn btn-danger" onclick="confirmation(event)">Xóa bài viết</a>
+                                    <a href="{{route('show-chi-tiet-bv',['id'=>$BaiViet->id])}}" class="btn btn-info">Xem bài viết</a>
+                                    @if($BaiViet->tag == "Mất đồ")
+                                    <a href="" class="btn btn-success">Đã nhận được</a>
+                                    @elseif($BaiViet->tag == "Nhặt đồ")
+                                    <a href="" class="btn btn-success">Đã trả đồ</a>
+                                    @endif
+                                </td>
                                     </tr>
                                 </tbody>
                                 @endforeach
@@ -92,9 +99,36 @@
                                 @foreach($listBaiVietcd as $BaiViet) 
                                 <tbody>
                                     <tr>
-                                    <td>{{$BaiViet->tieu_de}}</td>
+                                    <td style="width: 250px;">{{$BaiViet->tieu_de}}</td>
                                     <td>{{$BaiViet->noi_dung}}</td>
-                                    <td ><a href="{{route('show-sua-bai-viet',['id'=>$BaiViet->id])}}" class="btn btn-success">Sửa bài viết</a><a href="{{route('xoa-bai-viet-cn',['id'=>$BaiViet->id])}}" class="btn btn-danger" onclick="confirmation(event)">Xóa bài viết</a></td>
+                                    <td style="width: 100px;" ><a href="{{route('show-sua-bai-viet',['id'=>$BaiViet->id])}}" class="btn btn-success">Sửa bài viết</a><a href="{{route('xoa-bai-viet-cn',['id'=>$BaiViet->id])}}" class="btn btn-danger" onclick="confirmation(event)">Xóa bài viết</a></td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile2" role="tabpanel" aria-labelledby="nav-profile-tab2">
+                        <div>
+                            <div class="container">
+                                <div class="row">
+                                <table class="table">
+                                
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Tiêu đề</th>
+                                    <th scope="col">Nội dung</th>
+                                    <th scope="col">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                @foreach($baiVietluu as $TheoDoiBaiViet) 
+                                <tbody>
+                                    <tr>
+                                    <td style="width: 250px;">{{$TheoDoiBaiViet->tieu_de}}</td>
+                                    <td>{{$TheoDoiBaiViet->noi_dung}}</td>
+                                    <td style="width: 100px;" ><a href="{{route('show-chi-tiet-bv',['id'=>$BaiViet->id])}}" class="btn btn-info">Xem bài viết</a><a href="{{route('bo-luu-bai-viet', ['id' => $TheoDoiBaiViet->id])}}" class="btn btn-danger" onclick="confirmation(event)">Bỏ theo dõi</a></td>
                                     </tr>
                                 </tbody>
                                 @endforeach

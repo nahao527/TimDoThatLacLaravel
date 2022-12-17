@@ -1,6 +1,7 @@
 @extends('layouts.main-layouts')
 @section('content')
 <div class="container">
+@include('sweetalert::alert')
         <div class="row">
             <div class="post-detail">
                 <div class="title font-weight-bold">
@@ -50,6 +51,14 @@
                             <div class="properties-content-info">
                                 <div class="properties-location">
                                     <p><i class="icofont-location-pin"></i>{{$ctBaiViet->thanh_pho}}
+                                     <span><span style="visibility: hidden;">---------------------------</span>
+                                     @if(Auth::user())
+                                        @if(Auth::user()->id == $ctBaiViet->nguoi_dung_id)
+                                         @else
+                                        <a href="{{route('luu-bai-viet', ['id' => $ctBaiViet->id])}}" class="btn btn-success">Theo dõi bài viết</a>
+                                         @endif
+                                    @endif
+                                     </span>
                                     </p>
                                 </div>
                                 <div class="properties-location">
@@ -72,7 +81,8 @@
                             Nếu cần Hỗ Trợ Khẩn Cấp bạn vui lòng gọi HOTLINE: 086.711.0711</p>
                                 </div>
                             </div>
-                            <p class="btn btn-warning">SĐT: {{$ctBaiViet->so_dien_thoai}}</p>
+                            <div class="form-group">
+                            <a class="btn btn-warning">SĐT: {{$ctBaiViet->so_dien_thoai}}</a>
                             @if(Auth::user())
                                 @if(Auth::user()->id == $ctBaiViet->nguoi_dung_id)
 
@@ -80,10 +90,41 @@
                                 <a href="{{route('show-to-cao',['id'=>$ctBaiViet->id])}}" class="btn btn-danger">Tố cáo bài viết</a>
                                 @endif
                             @endif
+                            
+                            </div>
+                            
                             </div>
                         </div>
                         
                     </div>
+                    <div class="col-lg-8">
+                <div class="row">
+                    <div class="comment-wrapper">
+                        <div class="panel panel-info">
+                            <div class="panel-heading" id="target-comment" style="padding: 8px">
+                                Bình luận
+                                <div style="display: none">
+                                    <span class="user-id"></span>
+                                    <span class="post-id"></span>
+                                </div>
+                                <div style="display: none" class="reply-for">
+                                    Trả lời <span style="color: #00a65a">@Nguyen  Dat</span> <i class="icofont-ui-delete"></i>
+                                </div>
+
+                            </div>
+                            <div class="panel-body" style="padding: 8px">
+                                <textarea class="form-control comment-content" placeholder="write a comment..." rows="3"></textarea>
+                                <br>
+                                <a type="button" href="/login" class="btn btn-info pull-right create-comment">Đăng</a>
+                                <div class="clearfix"></div>
+                                <hr>
+                                <ul class="media-list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 </div>
             </div>
             </div>

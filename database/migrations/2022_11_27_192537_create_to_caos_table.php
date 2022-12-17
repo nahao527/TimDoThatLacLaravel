@@ -13,17 +13,17 @@ class CreateToCaosTable extends Migration
      */
     public function up()
     {
-        Schema::create('to_cao', function (Blueprint $table) {
-            $table->id();
-            $table->integer('nguoi_to_cao_id');
-            $table->integer('bai_viet_to_cao_id');
-            $table->string('tieu_de');
-            $table->string('noi_dung');
-            $table->string('hinh_anh_1')->nullable();
-            $table->string('hinh_anh_2')->nullable();
-            $table->SoftDeletes();
-            $table->timestamps();
-        });
+        // Schema::create('to_cao', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->integer('nguoi_to_cao_id');
+        //     $table->integer('bai_viet_to_cao_id');
+        //     $table->string('tieu_de');
+        //     $table->string('noi_dung');
+        //     $table->string('hinh_anh_1')->nullable();
+        //     $table->string('hinh_anh_2')->nullable();
+        //     $table->SoftDeletes();
+        //     $table->timestamps();
+        // });
     }
 
     /**

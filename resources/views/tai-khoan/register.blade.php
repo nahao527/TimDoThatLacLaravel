@@ -67,13 +67,6 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div>
-                                <label>Chọn ảnh đại diện của bạn (*):</label>
-                                <label class="picture" for="picture__input" tabIndex="0">
-                                    <span class="picture__image"></span>
-                                </label>
-                                    <input type="file" name="picture__input" id="picture__input">
-                            </div>
                             <br>
                             <p style="color: red">(*) Bắt buộc</p>
                             <div class="text-center">

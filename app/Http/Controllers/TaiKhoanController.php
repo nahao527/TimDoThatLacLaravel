@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\TaiKhoan;
 use App\Models\BaiViet;
 use App\Models\ThongBao;
+use App\Models\TheoDoiBaiViet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -41,18 +42,19 @@ class TaiKhoanController extends Controller
             're_password.same' => 'Mật khẩu không trùng khớp',
         ]
          );
+         
          $username = TaiKhoan::where('ten_dang_nhap',$request->username)->first();
          $email = TaiKhoan::where('email',$request->email)->first();
          if(!$username || !$email)
          {
-            $taiKhoan = TaiKhoan::create([
-                'ho_ten' => $request->hoten,
-                'so_dien_thoai' => $request->sodienthoai,
-                'email' => $request->email,
-                'ten_dang_nhap' => $request->username,
-                'mat_khau' => Hash::make($request->password),
-                'avatar' => "noavt.jpg",
-            ]);
+            $taiKhoan = new TaiKhoan;
+            $taiKhoan->ho_ten = $request->hoten;
+            $taiKhoan->so_dien_thoai = $request->sodienthoai;
+            $taiKhoan->email = $request->email;
+            $taiKhoan->ten_dang_nhap = $request->username;
+            $taiKhoan->mat_khau = Hash::make($request->password);
+            $taiKhoan->avatar = "noavt.jpg";
+            $taiKhoan->save();
             Alert::success('Tạo tài khoản thành công','Hãy đăng nhập để cùng tìm đồ của mình nhé!');   
             return redirect()->route('show-dang-nhap');
          }
@@ -123,7 +125,8 @@ class TaiKhoanController extends Controller
         $tttaiKhoan = TaiKhoan::find($id);
         $listBaiViet = BaiViet::where('nguoi_dung_id', '=', $tttaiKhoan->id) ->where('trang_thai','1')->get();
         $listBaiVietcd = BaiViet::where('nguoi_dung_id', '=', $tttaiKhoan->id) ->where('trang_thai','0')->get();
-        return view('tai-khoan.chi-tiet-tai-khoan', ['tttaikhoan' => $tttaiKhoan, 'listBaiViet'=>$listBaiViet, 'listBaiVietcd'=>$listBaiVietcd]);                                                                                                                                        
+        $baiVietluu = TheoDoiBaiViet::where('nguoi_dung_id', Auth::user()->id)->get();
+        return view('tai-khoan.chi-tiet-tai-khoan', ['tttaikhoan' => $tttaiKhoan, 'listBaiViet'=>$listBaiViet, 'listBaiVietcd'=>$listBaiVietcd, 'baiVietluu' => $baiVietluu]);                                                                                                                                        
     } 
     public function ShowSuaThongTin($id)
     {
