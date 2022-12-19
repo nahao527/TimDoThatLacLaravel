@@ -146,7 +146,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-3 logo">
-                    <a href="{{route('show-about-us')}}"><img src="{{ asset('/images/logo.png') }}" alt="" style="width: 220px"></a>
+                    <a href="{{route('show-trang-chu')}}"><img src="{{ asset('/images/logo.png') }}" alt="" style="width: 220px"></a>
                 </div>
                 <div class="col-9 d-flex justify-content-between">
                     <div class="align-self-center" style="width: 70%">

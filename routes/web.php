@@ -65,6 +65,7 @@ Route::get('quan-tri/danh-sach-tai-khoan-quan-tri',[TaiKhoanController::class,'D
 Route::get('quan-tri/thong-tin-cn/{id}',[TaiKhoanController::class,'ShowSuaThongTin'])->name('show-ttcn')->middleware('auth');
 
 Route::get('quan-tri/danh-sach-tai-khoan/xoa/{id}',[TaiKhoanController::class,'XoaTaiKhoan'])->name('xoa-tai-khoan')->middleware('auth');
+Route::get('quan-tri/danh-sach-tai-khoan-quan-tri/xoa/{id}',[TaiKhoanController::class,'XoaTaiKhoanAdm'])->name('xoa-tai-khoan-qtv')->middleware('auth');
 
 Route::get('bai-viet/dang-tin',[BaiVietController::class,'ShowDangTin'])->name('show-dang-tin')->middleware('auth');
 Route::post('bai-viet/dang-tin',[BaiVietController::class,'DangBai'])->name('xu-ly-dang-tin')->middleware('auth');
@@ -93,6 +94,7 @@ Route::get('tai-khoan/thong-tin-tai-khoan/{id}',[TaiKhoanController::class,'Thon
 Route::get('tai-khoan/thong-tin-tai-khoan/sua-thong-tin-ca-nhan/{id}',[TaiKhoanController::class,'ShowSuaThongTinUser'])->name('sua-thong-tin-user')->middleware('auth');
 Route::post('tai-khoan/thong-tin-tai-khoan/sua-thong-tin-ca-nhan/sua/{id}',[TaiKhoanController::class,'CapNhatThongTinUser'])->name('xl-cap-nhat-thong-tin-user')->middleware('auth');
 Route::get('tai-khoan/thong-tin-tai-khoan/bai-viet-ca-nhan/{id}',[BaiVietController::class,'XoaBaiCn'])->name('xoa-bai-viet-cn')->middleware('auth');
+Route::get('tai-khoan/thong-tin-tai-khoan/bai-viet-ca-nhan/da-nhan/{id}',[BaiVietController::class,'DaNhan'])->name('danh-dau-da-nhan')->middleware('auth');
 
 
 

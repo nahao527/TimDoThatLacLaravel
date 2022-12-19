@@ -15,7 +15,7 @@ class TaiKhoanController extends Controller
 {
     public function DanhSachTaiKhoan()
     {
-        $dsTaiKhoan=TaiKhoan::where('adm',0);  
+        $dsTaiKhoan=TaiKhoan::where('adm',0)->paginate(8);  
         return view('quan-tri.ds-tai-khoan',compact('dsTaiKhoan'))->with('i',(request()->input('page', 1)-1)*8);
     }
     public function DanhSachTaiKhoanQuanTri()
@@ -122,9 +122,19 @@ class TaiKhoanController extends Controller
             return "Không có user {$id}";
         }
         $taiKhoanXoa->delete();
+        Alert::success('Bạn đã xóa tài khoản '. $taiKhoanXoa->ho_ten);
         return redirect()->route('show-ds-tai-khoan');
     }
-
+    public function XoaTaiKhoanAdm($id)
+    {
+        $taiKhoanXoa = TaiKhoan::find($id);
+        if(empty($taiKhoanXoa)){
+            return "Không có user {$id}";
+        }
+        $taiKhoanXoa->delete();
+        Alert::success('Bạn đã xóa tài khoản '. $taiKhoanXoa->ho_ten);
+        return redirect()->route('show-ds-tai-khoan-qtv');
+    }
 
     public function ThongTinUser($id)
     {

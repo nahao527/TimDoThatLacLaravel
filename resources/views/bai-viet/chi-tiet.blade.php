@@ -105,27 +105,37 @@
                             <form action="{{route('xl-binh-luan', ['id'=> $ctBaiViet->id])}}" method="post" role="form">
                                 @csrf
                                 <label for="">Bình luận</label>
+                                @error('comment_content')
+                                <div class="alert alert-danger">
+                                    <li>{{ $message }}</li>
+                                </div>
+                                @enderror
                                 <textarea class="form-control comment-content" placeholder="Viết nội dung bình luận" rows="3" name="comment_content"></textarea>
                                 <br>
                                 <button type="submit" class="btn btn-info">Gửi bình luận</button>
                             </form>
+                            
                             </div>
                         </div>
                         <hr>
-                        <br>
-
                 @foreach($Binhluan as $BinhLuan)
                 <div class="d-flex flex-start">
               <img class="rounded-circle shadow-1-strong me-3"
-                src="" alt="avatar" width="60"
+                src="{{asset('images/'. $BinhLuan->anh_dai_dien)}}" alt="avatar" width="60"
                 height="60"/>
+                <label for="" style="visibility: hidden;">--</label>
                 <div>
-                <h6 class="fw-bold mb-1">{{$BinhLuan->ten_nguoi_dung}}</h6>
+                @if(Auth::user()->id == $BinhLuan->nguoi_dung_id)
+                <h6 class="fw-bold mb-1"><strong>{{$BinhLuan->ten_nguoi_dung}}</strong> (bạn)</h6>
+                @else
+                <h6 class="fw-bold mb-1"><strong>{{$BinhLuan->ten_nguoi_dung}}</strong></h6>
+                @endif
                 <p class="mb-0">
                   {{$BinhLuan->noi_dung}}
                 </p>
                 </div>
             </div>
+            <hr>
             @endforeach
           </div>
                         </div>

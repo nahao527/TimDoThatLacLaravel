@@ -63,7 +63,7 @@
                                                 @else  
                                                 <td>Tài Khoản Người Dùng</td>
                                                 @endif
-                                                <td><a class="btn btn-danger text-white" href="{{route('xoa-tai-khoan',['id'=>$TaiKhoan->id])}}" onclick="confirmation(event)">Xóa tài khoản</a></td>
+                                                <td><a class="btn btn-danger text-white" href="{{route('xoa-tai-khoan-qtv',['id'=>$TaiKhoan->id])}}" onclick="confirmation(event)">Xóa tài khoản</a></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

@@ -1,6 +1,7 @@
 @extends('layouts.main-layouts')
 @section('content')
 <div class="container profile">
+@include('sweetalert::alert')
         <div class="row">
             <div class="col-sm-3">
                 <div class="text-center">
@@ -70,9 +71,9 @@
                                     <td style="width: 100px;"><a href="{{route('xoa-bai-viet-cn',['id'=>$BaiViet->id])}}" class="btn btn-danger" onclick="confirmation(event)">Xóa bài viết</a>
                                     <a href="{{route('show-chi-tiet-bv',['id'=>$BaiViet->id])}}" class="btn btn-info">Xem bài viết</a>
                                     @if($BaiViet->tag == "Mất đồ")
-                                    <a href="" class="btn btn-success">Đã nhận được</a>
+                                    <a href="{{route('danh-dau-da-nhan', ['id' => $BaiViet->id])}}" class="btn btn-success">Đã nhận được</a>
                                     @elseif($BaiViet->tag == "Nhặt đồ")
-                                    <a href="" class="btn btn-success">Đã trả đồ</a>
+                                    <a href="{{route('danh-dau-da-nhan', ['id' => $BaiViet->id])}}" class="btn btn-success">Đã trả đồ</a>
                                     @endif
                                 </td>
                                     </tr>

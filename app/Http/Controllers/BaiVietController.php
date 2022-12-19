@@ -303,6 +303,18 @@ class BaiVietController extends Controller
             return redirect()->route('thong-tin-user',['id'=>Auth::user()->id]);
         }
         $xoaBaicn->delete();
+        Alert::success('Bạn đã xóa bài viết '.$xoaBaicn->tieu_de);
+        return redirect()->route('thong-tin-user',['id'=>Auth::user()->id]);
+    }
+    public function DaNhan($id)
+    {
+        $xoaBaicn = BaiViet::find($id);
+        if(empty($xoaBaicn)){
+            Alert::error('Bài viết không còn tồn tại');
+            return redirect()->route('thong-tin-user',['id'=>Auth::user()->id]);
+        }
+        $xoaBaicn->delete();
+        Alert::success('Bạn đã đánh dấu đã nhận bài viết! '.$xoaBaicn->tieu_de);
         return redirect()->route('thong-tin-user',['id'=>Auth::user()->id]);
     }
     public function ShowTips()
@@ -490,6 +502,13 @@ class BaiVietController extends Controller
     }
     public function BinhLuan(Request $request, $id)
     {
+        $request->validate([
+            'comment_content' => ['required','min:3'],
+        ],[
+            'comment_content.required' => 'Vui lòng nhập nội dung bình luận',
+            'comment_content.min' => 'Bình luận phải trên 3 ký tự',
+        ]
+         );
         $BaiViet = BaiViet::find($id);
         $BinhLuan = new BinhLuan();
         $BinhLuan->anh_dai_dien = Auth::user()->avatar;
