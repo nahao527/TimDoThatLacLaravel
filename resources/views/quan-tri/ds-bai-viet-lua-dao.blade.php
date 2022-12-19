@@ -1,6 +1,8 @@
 @extends('quan-tri.main-layout-quan-tri')
 @section('content')
 <div class="page-wrapper">
+@include('sweetalert::alert')
+
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -53,12 +55,14 @@
                                             <tr> 
                                                 <td>{{$BaiViet->id}}</td>
                                                 <td>{{$BaiViet->ten_nguoi_dung}}</td>
-                                                <td>{{$BaiViet->hinh_anh}}</td>
+                                                <td><img src="{{asset('images/'. $BaiViet->hinh_anh_1)}}" alt="" width="70"></td>
                                                 <td>{{$BaiViet->tieu_de}}</td>
                                                 <td>{{$BaiViet->noi_dung}}</td>
                                                 <td>{{$BaiViet->tag}}</td>
                                                 <td>{{$BaiViet->vi_tri}}</td>
-                                                <td><button style="background-color: red;"><a href="{{route('xoa-bai-viet',['id'=>$BaiViet->id])}}" style="color:white" onclick="confirmation(event)">Xóa bài viết</button></td>
+                                                <td><button style="background-color: red;"><a href="{{route('xoa-bai-viet',['id'=>$BaiViet->id])}}" style="color:white" onclick="confirmation(event)">Xóa bài viết</button>
+                                                <button style="background-color: green;"><a href="{{route('show-sua-bai-viet',['id'=>$BaiViet->id])}}" style="color:white">Sửa bài viết</button>
+                                            </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

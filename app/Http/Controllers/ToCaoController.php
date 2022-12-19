@@ -83,6 +83,7 @@ class ToCaoController extends Controller
         $xoaToCao = ToCao::where('bai_viet_to_cao_id', $xoaBai->id);
         $xoaToCao->delete();
         $xoaBai->delete();
+        Alert::success('Đã xóa bài viết thành công');
         return redirect()->route('show-ds-bai-viet-tc');
     }
     public function XoaBaiTC($id)

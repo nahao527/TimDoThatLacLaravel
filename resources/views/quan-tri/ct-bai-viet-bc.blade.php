@@ -52,6 +52,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="example-email" class="col-md-12">Hình ảnh</label>
+                                        <div class="col-md-12">
+                                            <img src="{{asset('images/'. $ctToCao->hinh_anh_1)}}" alt="" width="200">
+                                            <img src="{{asset('images/'. $ctToCao->hinh_anh_2)}}" alt="" width="200">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <div class="col-sm-12">
                                             <a href="{{route('show-chi-tiet-bv',['id'=>$ctToCao->bai_viet_to_cao_id])}}" class="btn btn-primary">Xem chi tiết bài viết này!</a>
                                             <a href="{{route('xoa-bai-viet-tc',['id'=>$ctToCao->bai_viet_to_cao_id])}}" class="btn btn btn-danger" onclick="confirmation(event)">Xóa bài viết này!</a>

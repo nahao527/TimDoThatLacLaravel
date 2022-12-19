@@ -1,6 +1,7 @@
 @extends('quan-tri.main-layout-quan-tri')
 @section('content')
 <div class="page-wrapper">
+@include('sweetalert::alert')
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->

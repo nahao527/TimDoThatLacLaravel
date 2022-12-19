@@ -127,9 +127,12 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{route('show-ttcn',['id'=>Auth::user()->id])}}" aria-expanded="false"><i
                                     class="mdi mdi-account-network"></i><span class="hide-menu">Thông tin cá nhân</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{route('show-ds-tai-khoan-qtv')}}" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
+                                    class="hide-menu">Tài Khoản Quản Trị Viên</span></a></li> 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{route('show-ds-tai-khoan')}}" aria-expanded="false"><i class="mdi mdi-face"></i><span
-                                    class="hide-menu">Tài Khoản</span></a></li>
+                                    class="hide-menu">Tài Khoản Người Dùng</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{route('show-ds-bai-viet-duyet')}}" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
                                     class="hide-menu">Bài Viết Chờ Duyệt</span></a></li>
@@ -142,6 +145,7 @@
                                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{route('show-ds-bai-viet-ld')}}" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
                                     class="hide-menu">Bài Viết Lừa Đảo</span></a></li>  
+                                    
                         
                     </ul>
 

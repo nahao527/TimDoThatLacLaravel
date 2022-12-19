@@ -18,6 +18,11 @@ class TaiKhoanController extends Controller
         $dsTaiKhoan=TaiKhoan::where('adm',0)->paginate(8);  
         return view('quan-tri.ds-tai-khoan',compact('dsTaiKhoan'))->with('i',(request()->input('page', 1)-1)*8);
     }
+    public function DanhSachTaiKhoanQuanTri()
+    {
+        $dsTaiKhoan=TaiKhoan::where('adm',1)->paginate(8);  
+        return view('quan-tri.ds-tai-khoan-qtv',compact('dsTaiKhoan'))->with('i',(request()->input('page', 1)-1)*8);
+    }
     public function ShowDangKy()
     {
         return view('tai-khoan.register');
@@ -288,7 +293,7 @@ class TaiKhoanController extends Controller
             $taiKhoan->adm = '1';
             $taiKhoan->save();
             Alert::success('Tạo tài khoản thành công Quản trị viên thành công!');   
-            return redirect()->route('show-them-tai-khoan-qt');
+            return redirect()->route('show-ds-tai-khoan-qtv');
          }
          else
          {

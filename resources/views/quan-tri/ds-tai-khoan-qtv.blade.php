@@ -2,7 +2,6 @@
 @section('content')
 <div class="page-wrapper">
 @include('sweetalert::alert')
-
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -12,10 +11,11 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0 d-flex align-items-center">
                               <li class="breadcrumb-item"><a href="index.html" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
-                              <li class="breadcrumb-item active" aria-current="page">Bài viết</li>
+                              <li class="breadcrumb-item active" aria-current="page">Tài Khoản</li>
                             </ol>
                           </nav>
-                        <h1 class="mb-0 fw-bold">Quản lý bài viết</h1> 
+                        <h1 class="mb-0 fw-bold">Quản lý tài khoản</h1> 
+                        <a href="{{route('show-them-tai-khoan-qt')}}" class="btn btn-success text-white">Thêm tài khoản quản trị viên</a>
                     </div>  
                 </div>
             </div>
@@ -34,48 +34,56 @@
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title m-t-40"><i
-                                        class="m-r-5 font-18 mdi mdi-numeric-1-box-multiple-outline"></i>DANH SÁCH BÀI VIẾT</h6>
+                                        class="m-r-5 font-18 mdi mdi-numeric-1-box-multiple-outline"></i>DANH SÁCH TÀI KHOẢN</h6>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Duyệt</th>
+                                                <th scope="col">STT</th>
                                                 <th scope="col">ID</th>
-                                                <th scope="col">Tên người dùng</th>
-                                                <th scope="col">Hình ảnh</th>
-                                                <th scope="col">Tiêu đề</th>
-                                                <th scope="col">Nội dung</th>
-                                                <th scope="col">Tag</th>
-                                                <th scope="col">Vị trí</th>
+                                                <th scope="col">Họ Tên</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Số Điện Thoại</th>
+                                                <th scope="col">Tên Tài Khoản</th>
+                                                <th scope="col">Quyền</th>
                                                 <th scope="col">Chức Năng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($dsBaiVietCanDuyet as $BaiViet)
+                                        @foreach($dsTaiKhoan as $TaiKhoan)
                                             <tr> 
-                                            <td><button style="background-color: green; border-radius: 4px"><a href="{{route('duyet-bai',['id'=>$BaiViet->id])}}" style="color:white">Duyệt</button></td>
-                                                <td>{{$BaiViet->id}}</td>
-                                                <td>{{$BaiViet->ten_nguoi_dung}}</td>
-                                                <td><img src="{{asset('images/'. $BaiViet->hinh_anh_1)}}" alt="" width="70"></td>
-                                                <td>{{$BaiViet->tieu_de}}</td>
-                                                <td>{{$BaiViet->noi_dung}}</td>
-                                                <td>{{$BaiViet->tag}}</td>
-                                                <td>{{$BaiViet->vi_tri}}</td>
-                                                
-                                                <td>
-                                                <button style="background-color: red; width:100px;border-radius: 4px"><a href="{{route('xoa-bai-viet',['id'=>$BaiViet->id])}}" style="color:white" onclick="confirmation(event)">Xóa bài</button>
-                                                <button style="background-color: yellow; width:100px;border-radius: 4px"><a href="{{route('show-canh-bao',['id'=>$BaiViet->id])}})}}" style="color:black">Cảnh báo</button>
-                                                <button style="background-color: green; width:100px;border-radius: 4px"><a href="{{route('show-ct-bai-viet',['id'=>$BaiViet->id])}})}}" style="color:white">Xem chi tiết</button></td>
+                                            <td>{{++$i}}</td>
+                                                <td>{{$TaiKhoan->id}}</td>
+                                                <td>{{$TaiKhoan->ho_ten}}</td>
+                                                <td>{{$TaiKhoan->email}}</td>
+                                                <td>{{$TaiKhoan->so_dien_thoai}}</td>
+                                                <td>{{$TaiKhoan->ten_dang_nhap}}</td>
+                                                @if($TaiKhoan->adm==1)
+                                                <td>Tài Khoản ADM</td>
+                                                @else  
+                                                <td>Tài Khoản Người Dùng</td>
+                                                @endif
+                                                <td><a class="btn btn-danger text-white" href="{{route('xoa-tai-khoan',['id'=>$TaiKhoan->id])}}" onclick="confirmation(event)">Xóa tài khoản</a></td>
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            {{$dsBaiVietCanDuyet->links()}}
+                            {{$dsTaiKhoan->links()}}
                         </div>   
                     </div> 
                 </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
             </div>
 </div>
 @endsection 

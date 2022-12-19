@@ -55,6 +55,8 @@ Route::get('quan-tri/danh-sach-tai-khoan',[TaiKhoanController::class,'DanhSachTa
 Route::get('quan-tri/danh-sach-bai-viet-duyet',[BaiVietController::class,'DanhSachBaiVietChoDuyet'])->name('show-ds-bai-viet-duyet')->middleware('auth');
 Route::get('quan-tri/danh-sach-bai-viet',[BaiVietController::class,'DanhSachBaiViet'])->name('show-ds-bai-viet')->middleware('auth');
 Route::get('quan-tri/danh-sach-bai-viet-lua-dao',[BaiVietController::class,'DanhSachBaiVietLuaDao'])->name('show-ds-bai-viet-ld')->middleware('auth');
+Route::get('quan-tri/danh-sach-tai-khoan-quan-tri',[TaiKhoanController::class,'DanhSachTaiKhoanQuanTri'])->name('show-ds-tai-khoan-qtv')->middleware('auth');
+
 
 Route::get('quan-tri/thong-tin-cn/{id}',[TaiKhoanController::class,'ShowSuaThongTin'])->name('show-ttcn')->middleware('auth');
 

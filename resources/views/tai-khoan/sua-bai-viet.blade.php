@@ -18,7 +18,7 @@
                                         <div class="card-body" style="margin-top: 25px; padding: 10px;">
                                             <div>
                                                 <label for="title"><span class="required">* </span>Tiêu đề bài đăng :</label>
-                                                <input type="text" class="form-control" placeholder="{{$SuaBaiViet->tieu_de}}" id="title" name="title" required>
+                                                <input type="text" class="form-control" value="{{$SuaBaiViet->tieu_de}}" id="title" name="title" required>
                                             </div>
                                             <br>
                                             <div>

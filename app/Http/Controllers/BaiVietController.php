@@ -27,12 +27,9 @@ class BaiVietController extends Controller
     }
     public function DanhSachBaiVietLuaDao()
     {
-        if(Auth::user()->adm == 1)
-        {
-            $dsBaiVietLuaDao=BaiViet::where('trang_thai', '=', '1')->get();
+            $dsBaiVietLuaDao=BaiViet::where('trang_thai', '=', '1')->where('muc_do',2)->get();
             return view('quan-tri.ds-bai-viet-lua-dao',compact('dsBaiVietLuaDao'));
-        }
-        return redirect()->route('show-trang-chu');
+            return redirect()->route('show-trang-chu');
     }
     public function ShowBaiVietThuCung()
     {
@@ -390,7 +387,9 @@ class BaiVietController extends Controller
             {
                 $file_Name5 = $SuaBaiViet->hinh_anh_5;
             }
-        $SuaBaiViet->tieu_de=$request->title;
+        if(Auth::user()-> adm == 0)
+        {
+            $SuaBaiViet->tieu_de=$request->title;
         $SuaBaiViet->tag=$request->post_type_id;
         $SuaBaiViet->noi_dung=$request->description;
         $SuaBaiViet->loai_do=$request->theloai;
@@ -405,6 +404,30 @@ class BaiVietController extends Controller
         $SuaBaiViet->save();
         Alert::success('Sửa bài viết thành công');
         return redirect()->route('show-sua-bai-viet',['id'=>$SuaBaiViet->id]);
+        }
+        else
+        {
+            $BaiViet = new BaiViet;
+                $BaiViet->nguoi_dung_id=Auth::user()->id;
+                $BaiViet->ten_nguoi_dung=Auth::user()->ho_ten;
+                $BaiViet->tieu_de=$request->title;
+                $BaiViet->noi_dung=$request->description;
+                $BaiViet->loai_do=$request->theloai;
+                $BaiViet->so_dien_thoai= Auth::user()->so_dien_thoai;
+                $BaiViet->tag=$request->post_type_id;
+                $BaiViet->thanh_pho=$request->thanhpho; 
+                $BaiViet->hinh_anh_1=$file_Name1;
+                $BaiViet->hinh_anh_2=$file_Name2;
+                $BaiViet->hinh_anh_3=$file_Name3;
+                $BaiViet->hinh_anh_4=$file_Name4;
+                $BaiViet->hinh_anh_5=$file_Name5;
+                $BaiViet->vi_tri="";
+                $BaiViet->trang_thai= "1";
+                $BaiViet->muc_do= "2";
+                $BaiViet->save();
+                Alert::success('Sửa bài viết thành công');
+        return redirect()->route('show-ds-bai-viet-ld');
+        }
     }
     public function ShowCtBaiViet($id)
     {
