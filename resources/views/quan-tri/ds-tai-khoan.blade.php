@@ -15,6 +15,7 @@
                             </ol>
                           </nav>
                         <h1 class="mb-0 fw-bold">Quản lý tài khoản</h1> 
+                        <a href="{{route('show-them-tai-khoan-qt')}}" class="btn btn-success text-white">Thêm tài khoản quản trị viên</a>
                     </div>  
                 </div>
             </div>

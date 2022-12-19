@@ -45,7 +45,7 @@ class TaiKhoanController extends Controller
          
          $username = TaiKhoan::where('ten_dang_nhap',$request->username)->first();
          $email = TaiKhoan::where('email',$request->email)->first();
-         if(!$username || !$email)
+         if(!$username && !$email)
          {
             $taiKhoan = new TaiKhoan;
             $taiKhoan->ho_ten = $request->hoten;
@@ -98,7 +98,7 @@ class TaiKhoanController extends Controller
 
             }else
             {
-                alert()->image('Xin chào!'.Auth::user()->ho_ten,'Chúc bạn một ngày vui vẻ',asset('images\111.jpg'),'250px','250px');
+                alert()->image('Xin chào! '.Auth::user()->ho_ten,'Chúc bạn một ngày vui vẻ',asset('images\111.jpg'),'250px','250px');
                 //Alert::success('Đăng nhập thành công','Xin chào '.Auth::user()->ho_ten);     
                 return redirect()->route('show-trang-chu');
             }
@@ -249,5 +249,53 @@ class TaiKhoanController extends Controller
         }
 
     }
-    
+    public function ShowThemTaiKhoan()
+    {
+        return view('quan-tri.them-tai-khoan-quan-tri');
+    }
+    public function ThemTaiKhoanQuanTri(Request $request)
+    {
+        $request->validate([
+            'hoten' => ['required','min:3','max:20'],
+            'sodienthoai' => 'required|min:10',
+            'email' =>'email|:@gmail.com',
+            'username' => 'required|min:6',
+            'password' => 'required|min:6',
+            're_password' => 'same:password'
+        ],[
+            'hoten.required' => 'Họ tên phải trên 3 ký tự',
+            'sodienthoai.required' => 'Số điện thoại phải 10 ký tự',
+            'email' => 'Email phải có @gmail.com',
+            'username.required' => 'Tên đăng nhập phải có ít nhất 6 ký tự',
+            'username.min' => 'Tên đăng nhập phải có ít nhất 6 ký tự',
+            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
+            'password.required' => 'Mật khẩu phải có ít nhất 6 ký tự',
+            're_password.same' => 'Mật khẩu không trùng khớp',
+        ]
+         );
+         
+         $username = TaiKhoan::where('ten_dang_nhap',$request->username)->first();
+         $email = TaiKhoan::where('email',$request->email)->first();
+         if(!$username && !$email)
+         {
+            $taiKhoan = new TaiKhoan;
+            $taiKhoan->ho_ten = $request->hoten;
+            $taiKhoan->so_dien_thoai = $request->sodienthoai;
+            $taiKhoan->email = $request->email;
+            $taiKhoan->ten_dang_nhap = $request->username;
+            $taiKhoan->mat_khau = Hash::make($request->password);
+            $taiKhoan->avatar = "noavt.jpg";
+            $taiKhoan->adm = '1';
+            $taiKhoan->save();
+            Alert::success('Tạo tài khoản thành công Quản trị viên thành công!');   
+            return redirect()->route('show-them-tai-khoan-qt');
+         }
+         else
+         {
+            Alert::error('Tạo tài khoản thất bại', 'Có vẻ như tên đăng nhập hoặc email đã tồn tại!');  
+        return redirect()->back();
+         }
+         
+        
+    }
 }
