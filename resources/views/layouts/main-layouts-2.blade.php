@@ -169,6 +169,19 @@
                                         
                                             @if(Auth::User())
                                                 @foreach($CanhBaoList as $ThongBao)
+                                                @if($ThongBao->tieu_de == 'Bài viết của bạn đã được duyệt')
+                                                <a href="{{route('show-chi-tiet-bv',['id' => $ThongBao->bai_viet_id])}}" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2">
+                                            <div style="height: 50px;">
+                                                <div class="text-left">
+                                                <p class="text-gray-600 text-sm mx-2">
+                                                <span class="font-bold">Bài viết</span> {{$ThongBao->tieu_de_post}} <br>
+                                                <span class="font-bold">{{$ThongBao->tieu_de}}</span><br>
+                                                <span class="font-bold text-red-500" href="#">{{$ThongBao->noi_dung}}</span>
+                                                </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                                @else
                                         <a href="{{route('ct-thong-bao',['id' => $ThongBao->id])}}" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2">
                                             <div style="height: 50px;">
                                                 <div class="text-left">
@@ -180,6 +193,7 @@
                                                 </div>
                                             </div>
                                         </a>
+                                        @endif
                                                 @endforeach
 
                                                 @else

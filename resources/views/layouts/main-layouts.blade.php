@@ -161,7 +161,7 @@
                     <li><a href="{{route('show-trang-chu')}}">Nhặt được</a></li>
                     <li><a href="/tips">Mẹo tìm đồ</a></li>
                                         @if(Auth::User())
-                                        <li><a href="">Xin chào {{Auth::User()->ho_ten}}</a></li>
+                                        <li><a href="{{route('thong-tin-user', ['id' => Auth::user()->id])}}">Xin chào {{Auth::User()->ho_ten}}</a></li>
                                         @endif
                 </ul>
             </nav>

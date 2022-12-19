@@ -268,6 +268,13 @@ class BaiVietController extends Controller
         }
         $duyetBai->trang_thai ='1';
         $duyetBai->save();
+        $thongbaoDuyet = new ThongBao();
+        $thongbaoDuyet->tieu_de_post = $duyetBai->tieu_de;
+        $thongbaoDuyet->nguoi_nhan_id = $duyetBai->nguoi_dung_id;
+        $thongbaoDuyet->bai_viet_id = $duyetBai->id;
+        $thongbaoDuyet->tieu_de = "Bài viết của bạn đã được duyệt";
+        $thongbaoDuyet->noi_dung = "Hãy theo dõi những thông báo mới nhé!";
+        $thongbaoDuyet->save();
         Alert::success('Đã duyệt bài viết');
         return redirect()->route('show-ds-bai-viet-duyet');
     }

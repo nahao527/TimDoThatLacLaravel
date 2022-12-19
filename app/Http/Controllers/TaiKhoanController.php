@@ -223,6 +223,7 @@ class TaiKhoanController extends Controller
     public function ctThongBao($id)
     {
         $ctThongBao = ThongBao::find($id);
+        $ctThongBao->delete();
         return view('tai-khoan.thong-bao-chi-tiet',  ['ctThongBao' => $ctThongBao]);
     }
     public function showDoiMatKhau($id)
