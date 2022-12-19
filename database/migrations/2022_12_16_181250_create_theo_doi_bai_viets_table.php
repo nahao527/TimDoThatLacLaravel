@@ -13,15 +13,15 @@ class CreateTheoDoiBaiVietsTable extends Migration
      */
     public function up()
     {
-        Schema::create('theo_doi_bai_viet', function (Blueprint $table) {
-            $table->id();
-            $table->integer('bai_viet_id');
-            $table->integer('nguoi_dung_id');
-            $table->string('tieu_de');
-            $table->string('noi_dung');
-            $table->softDeletes();
-            $table->timestamps();
-        });
+        // Schema::create('theo_doi_bai_viet', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->integer('bai_viet_id');
+        //     $table->integer('nguoi_dung_id');
+        //     $table->string('tieu_de');
+        //     $table->string('noi_dung');
+        //     $table->softDeletes();
+        //     $table->timestamps();
+        // });
     }
 
     /**

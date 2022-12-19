@@ -15,7 +15,7 @@ class TaiKhoanController extends Controller
 {
     public function DanhSachTaiKhoan()
     {
-        $dsTaiKhoan=TaiKhoan::where('adm',0)->paginate(8);  
+        $dsTaiKhoan=TaiKhoan::where('adm',0);  
         return view('quan-tri.ds-tai-khoan',compact('dsTaiKhoan'))->with('i',(request()->input('page', 1)-1)*8);
     }
     public function DanhSachTaiKhoanQuanTri()

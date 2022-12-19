@@ -99,30 +99,37 @@
                     </div>
                     <div class="col-lg-8">
                 <div class="row">
-                    <div class="comment-wrapper">
+                <div class="comment-wrapper">
                         <div class="panel panel-info">
-                            <div class="panel-heading" id="target-comment" style="padding: 8px">
-                                Bình luận
-                                <div style="display: none">
-                                    <span class="user-id"></span>
-                                    <span class="post-id"></span>
-                                </div>
-                                <div style="display: none" class="reply-for">
-                                    Trả lời <span style="color: #00a65a">@Nguyen  Dat</span> <i class="icofont-ui-delete"></i>
-                                </div>
-
-                            </div>
                             <div class="panel-body" style="padding: 8px">
-                                <textarea class="form-control comment-content" placeholder="write a comment..." rows="3"></textarea>
+                            <form action="{{route('xl-binh-luan', ['id'=> $ctBaiViet->id])}}" method="post" role="form">
+                                @csrf
+                                <label for="">Bình luận</label>
+                                <textarea class="form-control comment-content" placeholder="Viết nội dung bình luận" rows="3" name="comment_content"></textarea>
                                 <br>
-                                <a type="button" href="/login" class="btn btn-info pull-right create-comment">Đăng</a>
-                                <div class="clearfix"></div>
-                                <hr>
-                                <ul class="media-list">
-                                </ul>
+                                <button type="submit" class="btn btn-info">Gửi bình luận</button>
+                            </form>
                             </div>
                         </div>
-                    </div>
+                        <hr>
+                        <br>
+
+                @foreach($Binhluan as $BinhLuan)
+                <div class="d-flex flex-start">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="" alt="avatar" width="60"
+                height="60"/>
+                <div>
+                <h6 class="fw-bold mb-1">{{$BinhLuan->ten_nguoi_dung}}</h6>
+                <p class="mb-0">
+                  {{$BinhLuan->noi_dung}}
+                </p>
+                </div>
+            </div>
+            @endforeach
+          </div>
+                        </div>
+                </div>
                 </div>
             </div>
                 </div>

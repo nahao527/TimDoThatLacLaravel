@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BaiViet;
+use App\Models\BinhLuan;
 use App\Models\TheoDoiBaiViet;
 use App\Models\ThongBao;
 use Illuminate\Support\Facades\Auth;
@@ -248,12 +249,14 @@ class BaiVietController extends Controller
         return redirect()->route('show-ds-bai-viet');
     }
     public function ShowChiTietBaiViet($id)
-    {    $ctBaiViet = BaiViet::find($id);
+    {   
+        $Binhluan = BinhLuan::where('bai_viet_id',$id)->orderBy('id','DESC')->get();
+        $ctBaiViet = BaiViet::find($id);
         if(empty($ctBaiViet)){
             Alert::error('Bài viết không còn tồn tại');
             return view('bai-viet.chi-tiet', compact('ctBaiViet'));
          }
-        return view('bai-viet.chi-tiet', compact('ctBaiViet'));
+        return view('bai-viet.chi-tiet', ['ctBaiViet' => $ctBaiViet, 'Binhluan' => $Binhluan]);
         
     }
     public function DuyetBai($id)
@@ -485,4 +488,17 @@ class BaiVietController extends Controller
         Alert::success('Bạn đã bỏ theo dõi bài viết này');
         return redirect()->route('thong-tin-user',['id'=>Auth::user()->id]);
     }
+    public function BinhLuan(Request $request, $id)
+    {
+        $BaiViet = BaiViet::find($id);
+        $BinhLuan = new BinhLuan();
+        $BinhLuan->anh_dai_dien = Auth::user()->avatar;
+        $BinhLuan->ten_nguoi_dung = Auth::user()->ho_ten;
+        $BinhLuan->bai_viet_id = $id;
+        $BinhLuan->nguoi_dung_id = Auth::user()->id;
+        $BinhLuan->noi_dung = $request->comment_content;
+        $BinhLuan->save();
+        return redirect()->route('show-chi-tiet-bv', ['id' => $BaiViet->id]);
+    }
+    
 }

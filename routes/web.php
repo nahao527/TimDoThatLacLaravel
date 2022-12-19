@@ -28,7 +28,6 @@ Route::get('tai-khoan/logout',[TaiKhoanController::class, 'DangXuat'])->name('lo
 Route::get('tai-khoan/profile', [TaiKhoanController::class, 'profile'])->name('profile')->middleware('auth');
 
 Route::get('',[BaiVietController::class,'ShowBaiVietTrangChu'])->name('show-trang-chu');
-
 Route::get('bai-viet/lua-dao',[BaiVietController::class,'ShowBaiVietLuaDao'])->name('show-lua-dao');
 
 Route::get('bai-viet/thu-cung',[BaiVietController::class,'ShowBaiVietThuCung'])->name('show-thu-cung');
@@ -43,6 +42,11 @@ Route::get('bai-viet/tips',[BaiVietController::class,'ShowTips'])->name('show-ti
 Route::get('bai-viet/about-us',[BaiVietController::class,'ShowAboutUs'])->name('show-about-us');
 Route::get('bai-viet/sua/{id}',[BaiVietController::class,'ShowSuaBaiViet'])->name('show-sua-bai-viet');
 Route::post('bai-viet/sua/{id}',[BaiVietController::class,'SuaBaiViet'])->name('xl-sua-bai-viet');
+
+
+Route::get('bai-viet/chi-tiet-bai-viet/to-cao/{id}',[ToCaoController::class,'ShowToCao'])->name('show-to-cao')->middleware('auth');
+
+Route::post('bai-viet/chi-tiet-bai-viet/binh-luan/{id}',[BaiVietController::class,'BinhLuan'])->name('xl-binh-luan')->middleware('auth');
 
 
 Route::get('bai-viet/chi-tiet-bai-viet/to-cao/{id}',[ToCaoController::class,'ShowToCao'])->name('show-to-cao')->middleware('auth');
